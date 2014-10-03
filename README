@@ -1,0 +1,15 @@
+gitio
+=====
+
+CLI for http://git.io
+
+USAGE
+-----
+
+    $ ./gitio https://github.com/garethrees/gitio
+    http://git.io/202JeA
+
+CONTRIBUTING
+------------
+
+Pull requests welcome

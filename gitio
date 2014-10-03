@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+# Usage: gitio [ARGS] GITHUB_URL
+
+function usage {
+  cat <<EOF
+Usage: $( basename $0 ) [ARGS] GITHUB_URL
+
+ARGUMENTS
+  -h display this help message
+EOF
+}
+
+function make_shorturl() {
+  curl --include --silent --show-error http://git.io -F "url=$1" \
+    | grep 'Location' \
+    | cut -d' ' -f2
+}
+
+while getopts ":hk:" opt; do
+  case $opt in
+    h)
+      usage
+      exit 0
+      ;;
+    \?)
+      echo "Invalid option -$OPTARG" >&2
+      echo ""
+      usage
+      exit 1
+      ;;
+  esac
+done
+
+if (( $# != 1 ))
+then
+  usage
+  exit 1
+fi
+
+make_shorturl $1
